@@ -31,7 +31,9 @@ public class EventResource {
     @Consumes(MediaType.TEXT_PLAIN)
     public void sendEvent(String text) {
         KieSession ksession = runtimeBuilder.newKieSession();
-
+        
+        // the listen does not work!
+        ksession.addEventListener(listener);
         ksession.insert(text);
         ksession.fireAllRules();
         System.out.println(ksession.getFactCount());
