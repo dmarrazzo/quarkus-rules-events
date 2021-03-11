@@ -57,15 +57,14 @@ Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling o
 
 Once the service is up and running, you can use the following example to interact with the service.
 
-### POST /hello
+### POST /event
 
-Post "hello":
+Post "event":
 
 ```sh
-curl -H "Content-Type: application/json" -X POST -d '{"strings":["hello"]}' http://localhost:8080/hello
+curl -X POST "http://localhost:8090/event" -H  "accept: */*" -H  "Content-Type: text/plain" -d "testevent"
 ```
 
-the service will return `["hello", "world"]`
 
 ## Deploying with Kogito Operator
 
