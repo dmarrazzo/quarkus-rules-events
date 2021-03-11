@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 package org.kie.kogito.examples;
-unit Hello;
+
+//unit Hello;
 
 rule helloWorld
 when
-    $s: /strings[ this == "hello" ]
+    $s: String( this == "hello" )
 then
-    strings.add("world");
+    insert ( new String("world") );
 end
 
-query hello
-  $s : /strings
-end
+// query hello
+//   $s : /strings
+// end

@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.kie.api.runtime.KieSession;
+import org.kie.kogito.examples.MyAgendaEventListener;
 import org.kie.kogito.rules.KieRuntimeBuilder;
 
 @Path("/event")
@@ -16,6 +17,9 @@ public class EventResource {
 
     @Inject
     KieRuntimeBuilder runtimeBuilder;
+
+    @Inject
+    MyAgendaEventListener listener;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -30,5 +34,6 @@ public class EventResource {
 
         ksession.insert(text);
         ksession.fireAllRules();
+        System.out.println(ksession.getFactCount());
     }
 }
