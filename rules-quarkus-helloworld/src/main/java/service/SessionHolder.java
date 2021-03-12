@@ -17,7 +17,7 @@ public class SessionHolder {
     private KieSession kieSession;
 
     void onStart(@Observes StartupEvent event) {
-        setKieSession(runtimeBuilder.newKieSession());
+        setKieSession(runtimeBuilder.newKieSession("statefulSession"));
     }
 
     /**
