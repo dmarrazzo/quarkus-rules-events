@@ -9,17 +9,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.kie.api.runtime.KieSession;
-import org.kie.kogito.examples.MyAgendaEventListener;
-import org.kie.kogito.rules.KieRuntimeBuilder;
+
+import service.SessionHolder;
 
 @Path("/event")
 public class EventResource {
 
     @Inject
-    KieRuntimeBuilder runtimeBuilder;
-
-    @Inject
-    MyAgendaEventListener listener;
+    SessionHolder sessionHolder;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -30,10 +27,7 @@ public class EventResource {
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
     public void sendEvent(String text) {
-        KieSession ksession = runtimeBuilder.newKieSession();
-        
-        // the listen does not work!
-        ksession.addEventListener(listener);
+        KieSession ksession = sessionHolder.getKieSession();        
         ksession.insert(text);
         ksession.fireAllRules();
         System.out.println(ksession.getFactCount());
