@@ -21,7 +21,13 @@ public class EventResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String event() {
-        return "hello";
+        KieSession ksession = sessionHolder.getKieSession();
+
+        StringBuffer sb = new StringBuffer();
+        ksession.getObjects().forEach(o -> {
+            sb.append(o + " ");
+        });
+        return sb.toString();
     }
 
     @POST
@@ -29,7 +35,7 @@ public class EventResource {
     public void sendEvent(String text) {
         KieSession ksession = sessionHolder.getKieSession();        
         ksession.insert(text);
-        ksession.fireAllRules();
-        System.out.println(ksession.getFactCount());
+        int fired = ksession.fireAllRules();
+        System.out.format("fired: %d facts: %d\n", fired, ksession.getFactCount());
     }
 }
