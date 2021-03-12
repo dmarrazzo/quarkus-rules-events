@@ -1,11 +1,19 @@
 package service;
 
+import java.util.HashSet;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.kie.api.event.rule.AgendaEventListener;
+import org.kie.api.event.rule.RuleRuntimeEventListener;
 import org.kie.api.runtime.KieSession;
+import org.kie.kogito.examples.MyAgendaEventListener;
+import org.kie.kogito.examples.MyRuleConfig;
+import org.kie.kogito.examples.MyRuleRuntimeEventListener;
 import org.kie.kogito.rules.KieRuntimeBuilder;
+import org.kie.kogito.rules.RuleEventListenerConfig;
 
 import io.quarkus.runtime.StartupEvent;
 
@@ -17,7 +25,14 @@ public class SessionHolder {
     private KieSession kieSession;
 
     void onStart(@Observes StartupEvent event) {
-        setKieSession(runtimeBuilder.newKieSession("statefulSession"));
+        var agendaListeners = new HashSet<AgendaEventListener>();
+        var agendaListener = new MyAgendaEventListener();
+        agendaListeners.add(agendaListener);
+        var ruleEventListener = new HashSet<RuleEventListenerConfig>();
+        var ruleRuntimeEventListeners = new HashSet<RuleRuntimeEventListener>();
+        ruleRuntimeEventListeners.add(new MyRuleRuntimeEventListener());
+        var ruleConfig = new MyRuleConfig(ruleEventListener, agendaListeners, ruleRuntimeEventListeners);
+        setKieSession(runtimeBuilder.newKieSession("statefulSession", ruleConfig));
     }
 
     /**
