@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.kie.api.runtime.KieSession;
 
+import io.vertx.core.eventbus.EventBus;
 import service.SessionHolder;
 
 @Path("/event")
@@ -17,6 +18,9 @@ public class EventResource {
 
     @Inject
     SessionHolder sessionHolder;
+
+    @Inject
+    EventBus bus;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -35,6 +39,8 @@ public class EventResource {
     public void sendEvent(String text) {
         KieSession ksession = sessionHolder.getKieSession();
         ksession.insert(text);
-        ksession.fireAllRules();
+        int fired = ksession.fireAllRules();
+        if (fired > 0)
+            bus.send("rules-fired", null);
     }
 }
