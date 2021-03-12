@@ -7,8 +7,8 @@
     <version>1.3.0.Final</version>
   </parent>
   <groupId>org.kie.kogito.examples</groupId>
-  <artifactId>rules-quarkus-helloworld</artifactId>
-  <name>Kogito Example :: Rules HelloWorld</name>
+  <artifactId>rules-quarkus-stateful</artifactId>
+  <name>Kogito Example :: Rules Stateful</name>
   <dependencyManagement>
     <dependencies>
       <dependency>

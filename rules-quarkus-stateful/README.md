@@ -1,8 +1,8 @@
-# Rules + Quarkus config example
+# Kogito Event Driven Decisioning
 
 ## Description
 
-A minimal hello world rule service.
+A minimal example of how to use kogito for event driven decisioning (stateful session)
 
 ## Installing and Running
 
@@ -18,24 +18,24 @@ When using native image compilation, you will also need:
   - Environment variable GRAALVM_HOME set accordingly
   - Note that GraalVM native image compilation typically requires other packages (glibc-devel, zlib-devel and gcc) to be installed too.  You also need 'native-image' installed in GraalVM (using 'gu install native-image'). Please refer to [GraalVM installation documentation](https://www.graalvm.org/docs/reference-manual/aot-compilation/#prerequisites) for more details.
 
-### Compile and Run in Local Dev Mode
+### Run in Local Dev Mode
 
 ```sh
-mvn clean compile quarkus:dev
+mvn clean quarkus:dev
 ```
 
 ### Package and Run in JVM mode
 
 ```sh
 mvn clean package
-java -jar target/rules-quarkus-helloworld-runner.jar
+java -jar target/rules-quarkus-stateful-runner.jar
 ```
 
 or on windows
 
 ```sh
 mvn clean package
-java -jar target\rules-quarkus-helloworld-runner.jar
+java -jar target\rules-quarkus-stateful-runner.jar
 ```
 
 ### Package and Run using Local Native Image
@@ -48,7 +48,7 @@ mvn clean package -Pnative
 To run the generated native executable, generated in `target/`, execute
 
 ```sh
-./target/rules-quarkus-helloworld-runner
+./target/rules-quarkus-stateful-runner
 ```
 
 Note: This does not yet work on Windows, GraalVM and Quarkus should be rolling out support for Windows soon.
@@ -62,7 +62,7 @@ Once the service is up and running, you can use the following example to interac
 Post "event":
 
 ```sh
-curl -X POST "http://localhost:8090/event" -H  "accept: */*" -H  "Content-Type: text/plain" -d "testevent"
+curl -X POST "http://localhost:8090/event" -H  "accept: */*" -H  "Content-Type: text/plain" -d "hello"
 ```
 
 
