@@ -21,3 +21,7 @@ when
 then
     insert ( new String("world") );
 end
+
+query "all worlds"
+    $s : String( this == "world" )
+end
