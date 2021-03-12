@@ -1,4 +1,4 @@
-package org.kie.kogito.examples;
+package listener;
 
 import org.drools.core.config.AbstractRuleConfig;
 import org.kie.api.event.rule.AgendaEventListener;

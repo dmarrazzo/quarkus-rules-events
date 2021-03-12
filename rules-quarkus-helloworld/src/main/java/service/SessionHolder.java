@@ -9,13 +9,13 @@ import javax.inject.Inject;
 import org.kie.api.event.rule.AgendaEventListener;
 import org.kie.api.event.rule.RuleRuntimeEventListener;
 import org.kie.api.runtime.KieSession;
-import org.kie.kogito.examples.MyAgendaEventListener;
-import org.kie.kogito.examples.MyRuleConfig;
-import org.kie.kogito.examples.MyRuleRuntimeEventListener;
 import org.kie.kogito.rules.KieRuntimeBuilder;
 import org.kie.kogito.rules.RuleEventListenerConfig;
 
 import io.quarkus.runtime.StartupEvent;
+import listener.MyAgendaEventListener;
+import listener.MyRuleConfig;
+import listener.MyRuleRuntimeEventListener;
 
 @ApplicationScoped
 public class SessionHolder {

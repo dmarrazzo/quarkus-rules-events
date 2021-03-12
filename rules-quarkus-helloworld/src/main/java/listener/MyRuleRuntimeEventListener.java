@@ -1,4 +1,4 @@
-package org.kie.kogito.examples;
+package listener;
 
 import org.jboss.logging.Logger;
 import org.kie.api.event.rule.ObjectDeletedEvent;

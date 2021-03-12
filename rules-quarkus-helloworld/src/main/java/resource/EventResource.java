@@ -33,9 +33,8 @@ public class EventResource {
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
     public void sendEvent(String text) {
-        KieSession ksession = sessionHolder.getKieSession();        
+        KieSession ksession = sessionHolder.getKieSession();
         ksession.insert(text);
-        int fired = ksession.fireAllRules();
-        System.out.format("fired: %d facts: %d\n", fired, ksession.getFactCount());
+        ksession.fireAllRules();
     }
 }
