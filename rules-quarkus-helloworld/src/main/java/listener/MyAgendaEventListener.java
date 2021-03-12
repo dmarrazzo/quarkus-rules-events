@@ -29,6 +29,6 @@ public class MyAgendaEventListener extends DefaultAgendaEventListener {
     @Override
     public void afterMatchFired(AfterMatchFiredEvent event) {
         int count = counter.incrementAndGet();
-        LOG.infof("Event fired %d time(s).", count);
+        LOG.debugf("Event fired %d time(s).", count);
     }
 }

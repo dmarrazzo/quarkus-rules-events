@@ -12,17 +12,17 @@ public class MyRuleRuntimeEventListener implements RuleRuntimeEventListener {
 
     @Override
     public void objectInserted(ObjectInsertedEvent event) {
-        LOG.infof("Inserted: %s", event.getObject());
+        LOG.debugf("Inserted: %s", event.getObject());
     }
 
     @Override
     public void objectUpdated(ObjectUpdatedEvent event) {
-        LOG.infof("Updated: %s", event.getObject());
+        LOG.debugf("Updated: %s", event.getObject());
     }
 
     @Override
     public void objectDeleted(ObjectDeletedEvent event) {
-        LOG.infof("Deleted: %s", event.getOldObject());
+        LOG.debugf("Deleted: %s", event.getOldObject());
     }
 
 }
