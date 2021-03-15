@@ -15,13 +15,17 @@
  */
 package org.kie.kogito.examples;
 
-rule helloWorld
+import model.TemperatureReading;
+import model.Warning;
+
+rule "raising too quickly"
 when
-    $s: String( this == "hello" )
+    previousTR : TemperatureReading()
+    TemperatureReading( this after [0s, 15s] previousTR , temperature > previousTR.temperature + 5 )
 then
-    insert ( new String("world") );
+    insert ( new Warning("raising too quickly") );
 end
 
-query "all worlds"
-    $s : String( this == "world" )
+query "all warnings"
+    warning : Warning()
 end

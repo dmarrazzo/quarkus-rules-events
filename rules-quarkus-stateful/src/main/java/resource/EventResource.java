@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import org.kie.api.runtime.KieSession;
 
 import io.vertx.core.eventbus.EventBus;
+import model.TemperatureReading;
 import service.SessionHolder;
 
 @Path("/event")
@@ -35,10 +36,10 @@ public class EventResource {
     }
 
     @POST
-    @Consumes(MediaType.TEXT_PLAIN)
-    public void sendEvent(String text) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void sendEvent(TemperatureReading reading) {
         KieSession ksession = sessionHolder.getKieSession();
-        ksession.insert(text);
+        ksession.insert(reading);
         int fired = ksession.fireAllRules();
         if (fired > 0)
             bus.send("rules-fired", null);

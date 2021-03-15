@@ -22,9 +22,9 @@ public class ActionPublisher {
     public void action(Object object) {
         LOG.info("rules fired");
         KieSession kieSession = sessionHolder.getKieSession();
-        QueryResults results = kieSession.getQueryResults("all worlds");
+        QueryResults results = kieSession.getQueryResults("all warnings");
         results.forEach(r -> {
-            FactHandle factHandle = r.getFactHandle("$s");
+            FactHandle factHandle = r.getFactHandle("warning");
             LOG.info(kieSession.getObject(factHandle));
             kieSession.delete(factHandle);
         });
